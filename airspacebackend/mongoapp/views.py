@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from .models import NFT
-
+import google.generativeai as genai
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -12,7 +12,7 @@ import subprocess
 import json
 from ollama import Client
 from web3 import Web3
-import requests
+# import requests
 from datetime import datetime
 import os
 from dotenv import load_dotenv
@@ -20,10 +20,11 @@ import re
 
 load_dotenv()
 w3 = Web3(Web3.HTTPProvider(os.getenv('ETHEREUM_NODE_URL', 'https://eth-sepolia.g.alchemy.com/v2/l05qmoEsKgcOHBnYvDhWjJD8oRrrG0sw')))
-
+genai.configure(api_key="AIzaSyBnpTrUpfVmBkqXBFTMl_7C81OkXaoh8kw")
+model=model = genai.GenerativeModel('gemini-2.0-flash-001')
 # You'll need to get an API key from Etherscan
 ETHERSCAN_API_KEY = os.getenv('F9BP7FJ5VZKBA6R62KX1NN97J55TSWRDH8')
-OLLAMA_MODEL = "phi3:latest"  # Change to your preferred model (e.g., "llama3", "gemma")
+OLLAMA_MODEL = "phi3.5:3.8b-mini-instruct-q5_K_M"  # Change to your preferred model (e.g., "llama3", "gemma")
 
 def validate_ethereum_address(address):
     """Validate Ethereum address format"""
@@ -74,13 +75,18 @@ Signatures and notarization requirements
 The agreement should be structured in formal legal language, with clear sections for definitions, terms, conditions, and execution details. Include specific clauses about the immutable nature of blockchain transactions and the finality of the transfer once executed on-chain.
     """
     
-    response = chat(
-                model=OLLAMA_MODEL,
-                messages=[{"role": "user", "content": prompt}]
-            )
-    return response['message']['content']
+    # response = chat(
+    #             model=OLLAMA_MODEL,
+    #             messages=[{"role": "user", "content": prompt}]
+    #         )
+    # return response['message']['content']
+    model = genai.GenerativeModel('gemini-1.5-pro')
     
+    # Get response
+    response = model.generate_content(prompt)
     
+    return response.text
+    # return response["text"]
     # return "Error: Unable to generate agreement."
 
 @api_view(['POST'])
@@ -172,7 +178,7 @@ def analyze_deployment(request):
             try:
                 # Execute the Hardhat deployment
                 result = subprocess.run(
-    ['npx', 'hardhat', 'run', f'/Users/researchassistant/hacklahoma25/AirSpace/deploy.js', f'{tokens}', '--network', 'sepolia'],
+    ['npx', 'hardhat', 'run', f'/Users/researchassistant/hacklahoma25/AirSpace/deploy.js ' ,f'--nft-id {tokens} ', '--network', 'sepolia'],
     stdout=subprocess.PIPE,  # Capture standard output
     stderr=subprocess.PIPE,  # Capture standard error
     text=True,
