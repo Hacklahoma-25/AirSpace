@@ -37,13 +37,13 @@ def get_all_nfts(request):
 
 
 
-def generate_legal_agreement(nft_token_id, nft_value, buyer_address, seller_address):
+def generate_legal_agreement(nft_token_id, nft_value, buyer_address, seller_address,Seller_Physical,Buyer_Physical,Seller_Name,Buyer_Name):
     """
     Calls the Ollama model to generate a legal agreement for the NFT transaction.
     """
     prompt = f"""
-    Generate a legally binding agreement stating that the buyer ({buyer_address}) agrees to purchase the NFT ({nft_token_id}) 
-    from the seller ({seller_address}) for {nft_value}. The agreement should be formal, legally sound, and include 
+    Generate a legally binding agreement stating that the buyer ({buyer_address}) bearing name({Buyer_Name}) has physical address of ({Buyer_Physical})  agrees to purchase the NFT ({nft_token_id}) 
+    from the seller ({seller_address}) bearing ({Seller_Name}) has physical address of ({Seller_Physical}) for {nft_value}. The agreement should be formal, legally sound, and include 
     terms of acceptance, ownership transfer, and responsibilities of both parties.
     """
     
@@ -62,7 +62,7 @@ def create_legal_agreement(request):
     API to generate a legal agreement for an NFT transaction.
     """
     data = request.data
-    required_fields = ["nft_token_id", "nft_value", "buyer_address", "seller_address"]
+    required_fields = ["nft_token_id", "nft_value", "buyer_address", "seller_address","Buyer_Name","Seller_Name","Buyer_physical","Seller_Physical"]
     
     # Validate input fields
     for field in required_fields:
@@ -74,7 +74,12 @@ def create_legal_agreement(request):
         data["nft_token_id"],
         data["nft_value"],
         data["buyer_address"],
-        data["seller_address"]
+        data["seller_address"],
+        data["Buyer_Name"],
+        data["Seller_Name"],
+        data["Buyer_physical"],
+        data["Seller_Physical"]
+
     )
 
     return Response({
