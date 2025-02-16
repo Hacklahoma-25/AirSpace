@@ -9,17 +9,11 @@ from ollama import chat
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import subprocess
-import json
-from ollama import Client
-from web3 import Web3
-import requests
-from datetime import datetime
 import os
 from dotenv import load_dotenv
 import re
 
 load_dotenv()
-w3 = Web3(Web3.HTTPProvider(os.getenv('ETHEREUM_NODE_URL', 'https://eth-sepolia.g.alchemy.com/v2/l05qmoEsKgcOHBnYvDhWjJD8oRrrG0sw')))
 
 # You'll need to get an API key from Etherscan
 ETHERSCAN_API_KEY = os.getenv('F9BP7FJ5VZKBA6R62KX1NN97J55TSWRDH8')
@@ -81,10 +75,6 @@ def create_legal_agreement(request):
         "message": "Legal agreement generated successfully",
         "agreement": agreement_text
     }, status=status.HTTP_200_OK)
-
-
-
-
 
 @api_view(['POST'])
 def analyze_deployment(request):

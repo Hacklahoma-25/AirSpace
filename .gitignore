@@ -20,3 +20,5 @@ airspace/
 # Ignore Python cache files
 __pycache__/
 *.py[cod]
+
+test_space
