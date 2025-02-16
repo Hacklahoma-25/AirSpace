@@ -24,7 +24,7 @@ export const ListingsGrid = () => {
               <p className="text-muted text-opacity-60 text-18 mb-6">
                 {listing.description}
               </p>
-              <div className="grid grid-cols-2 gap-4 mb-8">
+              <div className="grid grid-cols-2 gap-4 mb-4">
                 <div className="bg-deepSlate p-4 rounded-xl">
                   <p className="text-muted text-16">Current Height</p>
                   <p className="text-white text-24">{listing.currentHeight}</p>
@@ -33,6 +33,10 @@ export const ListingsGrid = () => {
                   <p className="text-muted text-16">Max Allowed Height</p>
                   <p className="text-white text-24">{listing.maxHeight}</p>
                 </div>
+              </div>
+              <div className="bg-deepSlate p-4 rounded-xl mb-8">
+                <p className="text-muted text-16">Floors to be Bought</p>
+                <p className="text-primary text-24">{listing.floorsToBuy}</p>
               </div>
             </div>
             <div className="flex items-center justify-between">

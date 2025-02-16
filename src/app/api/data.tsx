@@ -109,6 +109,7 @@ export const listingsData = [
     address: "6650 Niagara Parkway, Niagara Falls, ON L2G 0L0",
     currentHeight: "10 floors",
     maxHeight: "25 floors",
+    floorsToBuy: "11-25 floors",
     price: "250,000"
   },
   {
@@ -118,6 +119,7 @@ export const listingsData = [
     address: "1128 West Georgia Street, Vancouver, BC V6E 0A8",
     currentHeight: "15 floors",
     maxHeight: "30 floors",
+    floorsToBuy: "16-30 floors",
     price: "375,000"
   },
   {
@@ -127,6 +129,7 @@ export const listingsData = [
     address: "1100 Collins Avenue, Miami Beach, FL 33139",
     currentHeight: "8 floors",
     maxHeight: "20 floors",
+    floorsToBuy: "9-20 floors",
     price: "420,000"
   },
   {
@@ -136,6 +139,7 @@ export const listingsData = [
     address: "71 Macquarie Street, Sydney NSW 2000",
     currentHeight: "12 floors",
     maxHeight: "28 floors",
+    floorsToBuy: "13-28 floors",
     price: "580,000"
   },
   {
@@ -145,6 +149,7 @@ export const listingsData = [
     address: "Dubai Marina, Plot No. JLT-PH2-T2A Dubai, UAE",
     currentHeight: "20 floors",
     maxHeight: "45 floors",
+    floorsToBuy: "21-45 floors",
     price: "680,000"
   }
 ];
