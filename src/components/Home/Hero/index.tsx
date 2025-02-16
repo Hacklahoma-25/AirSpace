@@ -99,6 +99,7 @@ const Hero = () => {
                 width={1150}
                 height={1150}
                 priority
+                className="rounded-3xl"
               />
             </div>
           </motion.div>
