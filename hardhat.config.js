@@ -25,8 +25,8 @@ if (!config.SEPOLIA_RPC_URL) {
 }
 
 task("deploy", "Deploys the NFT marketplace")
-  .addPositionalParam("nftId", "The ID of the NFT to trade")
-  .setAction(async (taskArgs) => {
+  .addParam("nftId", "The ID of the NFT to trade", undefined, types.string)
+  .setAction(async (taskArgs, hre) => {
     const { main } = require("./deploy");
     await main(taskArgs.nftId);
   });
