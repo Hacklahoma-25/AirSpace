@@ -42,9 +42,36 @@ def generate_legal_agreement(nft_token_id, nft_value, buyer_address, seller_addr
     Calls the Ollama model to generate a legal agreement for the NFT transaction.
     """
     prompt = f"""
-    Generate a legally binding agreement stating that the buyer ({buyer_address}) bearing name({Buyer_Name}) has physical address of ({Buyer_Physical})  agrees to purchase the NFT ({nft_token_id}) 
-    from the seller ({seller_address}) bearing ({Seller_Name}) has physical address of ({Seller_Physical}) for {nft_value}. The agreement should be formal, legally sound, and include 
-    terms of acceptance, ownership transfer, and responsibilities of both parties.
+    Generate a comprehensive, legally binding Air Rights Purchase Agreement with the following details:
+
+BUYER:
+Wallet Address: {buyer_address}
+Legal Name: {Buyer_Name}
+Physical Address: {Buyer_Physical}
+
+SELLER:
+Wallet Address: {seller_address}
+Legal Name: {Seller_Name}
+Physical Address: {Seller_Physical}
+
+ASSET DETAILS:
+Air Rights NFT Token ID: {nft_token_id}
+Purchase Price: {nft_value} USDC
+Execution Date: February 16, 2025
+
+The agreement should include:
+Clear definition of Air Rights being transferred, including vertical development rights and view corridor protection
+Detailed terms of the blockchain-based transfer using the NFT smart contract
+Representations and warranties from both parties
+Compliance with local zoning laws and building regulations
+Rights and restrictions regarding future development
+Transfer of ownership process and confirmation
+Dispute resolution mechanisms
+Governing law and jurisdiction
+Force majeure clauses
+Signatures and notarization requirements
+
+The agreement should be structured in formal legal language, with clear sections for definitions, terms, conditions, and execution details. Include specific clauses about the immutable nature of blockchain transactions and the finality of the transfer once executed on-chain.
     """
     
     response = chat(
@@ -62,7 +89,7 @@ def create_legal_agreement(request):
     API to generate a legal agreement for an NFT transaction.
     """
     data = request.data
-    required_fields = ["nft_token_id", "nft_value", "buyer_address", "seller_address","Buyer_Name","Seller_Name","Buyer_physical","Seller_Physical"]
+    required_fields = ["nft_token_id", "nft_value", "buyer_address", "seller_address","Buyer_Name","Seller_Name","Buyer_Physical","Seller_Physical"]
     
     # Validate input fields
     for field in required_fields:
@@ -77,7 +104,7 @@ def create_legal_agreement(request):
         data["seller_address"],
         data["Buyer_Name"],
         data["Seller_Name"],
-        data["Buyer_physical"],
+        data["Buyer_Physical"],
         data["Seller_Physical"]
 
     )
@@ -145,7 +172,7 @@ def analyze_deployment(request):
             try:
                 # Execute the Hardhat deployment
                 result = subprocess.run(
-    ['npx', 'hardhat', 'run', '/Users/researchassistant/hacklahoma25/AirSpace/deploy.js', '--network', 'sepolia'],
+    ['npx', 'hardhat', 'run', f'/Users/researchassistant/hacklahoma25/AirSpace/deploy.js', f'{tokens}', '--network', 'sepolia'],
     stdout=subprocess.PIPE,  # Capture standard output
     stderr=subprocess.PIPE,  # Capture standard error
     text=True,

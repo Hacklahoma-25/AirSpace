@@ -4,7 +4,8 @@ const hre = require("hardhat");
 async function main() {
     // Contract details
     const nftContractAddress = "0x676AB843E8aDd6363779409Ee5057f4a26F46F59";
-    const nftId = "3";
+    // const nftId = "3";
+    const nftId = process.argv[2]; 
     const price = hre.ethers.utils.parseEther("0.0001");
 
     // Get signers for seller and buyer
