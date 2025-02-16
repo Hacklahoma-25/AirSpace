@@ -24,6 +24,13 @@ if (!config.SEPOLIA_RPC_URL) {
   throw new Error('Missing SEPOLIA_RPC_URL in .env file');
 }
 
+task("deploy", "Deploys the NFT marketplace")
+  .addPositionalParam("nftId", "The ID of the NFT to trade")
+  .setAction(async (taskArgs) => {
+    const { main } = require("./deploy");
+    await main(taskArgs.nftId);
+  });
+
 module.exports = {
   solidity: {
     version: "0.8.20",

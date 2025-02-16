@@ -1,10 +1,9 @@
 require('dotenv').config();
 const hre = require("hardhat");
 
-async function main() {
+async function main(nftId) {
     // Contract details
     const nftContractAddress = "0x676AB843E8aDd6363779409Ee5057f4a26F46F59";
-    const nftId = "3";
     const price = hre.ethers.utils.parseEther("0.0001");
 
     // Get signers for seller and buyer
@@ -61,9 +60,15 @@ async function main() {
     }
 }
 
-main()
-    .then(() => process.exit(0))
-    .catch((error) => {
-        console.error(error);
-        process.exit(1);
-    });
+// Export the main function
+module.exports = { main }
+
+// Only execute if running directly
+if (require.main === module) {
+    main()
+        .then(() => process.exit(0))
+        .catch((error) => {
+            console.error(error);
+            process.exit(1);
+        });
+}
