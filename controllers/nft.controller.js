@@ -4,7 +4,7 @@ const util = require('util');
 const execPromise = util.promisify(exec);
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const genai = new GoogleGenerativeAI("AIzaSyCLemwaUUCHprXaIcuPC-3j7A6V59pj5xw");
+const genai = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
 exports.getAllNFTs = async (req, res) => {
   try {
